@@ -24,31 +24,47 @@ MonadTestnet/
 │   ├── Ambient-Finance/
 │   │   ├── index.js                  # Main script for Ambient-Finance module (to be implemented)
 │   │   └── ABI.js                    # ABI definitions for Ambient-Finance contracts (to be implemented)
-│   ├── stake_apr.io/
+│   ├── Apriori/
 │   │   ├── index.js                  # Main script for stake_apr.io module (handles staking & APR token operations)
-│   │   ├── ABI.js                    # ABI definitions for stake_apr.io contracts (implemented)
-│   │   ├── faucet.js                 # Faucet script for stake_apr.io (to be implemented)
-│   │   └── scripts/                  # Additional scripts for stake_apr.io (empty for now)
-│   └── NFTs-Mint/                   # Module for minting NFTs (empty for now)
+│   │   ├── ABI.js                    # ABI definitions for Apriori contracts (implemented)
+│   │   ├── faucet.js                 # Faucet script for Apriori (to be implemented)
+│   │   └── scripts/                  # Additional scripts for Apriori (empty for now)
+│   ├── NFTs-Mint/                    # Module for minting NFTs (empty for now)
+│   ├── BeanSwap/
+│   │   ├── ABI.js                    # Exports ABI definitions for Bean-Exchange & token + router contracts
+│   │   ├── swap.js                   # Interactive swap script with token approvals, dynamic gas settings, and support for wrapping/unwrapping MON/WMON as well as custom tokens
+│   │   ├── liquidity.js              # To be Implemented – Script for managing liquidity operations (e.g., adding/removing liquidity)
+│   │   └── perps.js                  # To be Implemented – Script for handling perpetual contracts trading
+│   ├── Kintzu/
+│   │   ├── index.js                  # To be Implemented – Main script for the Kintzu module
+│   │   └── ABI.js                    # To be Implemented – ABI definitions for Kintzu contracts
+│   └── Synnax/
+│       ├── index.js                  # To be Implemented – Main script for the Synnax module
+│       └── ABI.js                    # To be Implemented – ABI definitions for Synnax contracts
 ├── faucets/
 │   ├── official_faucet/
 │   │   ├── claim.js                  # Script to claim tokens from the official faucet
 │   │   ├── solve_captcha.py          # Python script to solve reCAPTCHA using 2Captcha
 │   │   └── scripts/
-│   │       └── apis.js               # Script containing API calls for the official faucet (to be implemented)
+│   │       └── apis.js               # To be Implemented – Script containing API calls for the official faucet
 │   ├── morkie_faucet/
-│   │   ├── claim.js                  # Script to claim tokens from the Morkie faucet; verifies Morkie NFT ownership and claims via API
+│   │   ├── claim.js                  # Script to claim tokens from the Morkie faucet; verifies NFT ownership and claims via API
 │   │   └── scripts/
-│   │       └── apis.js               # Script containing API calls for the Morkie faucet 
-│   └── owlto_faucet                 # Owlto faucet script (to be implemented)
-├── index.js                         # Main entry point with interactive menu and child process execution
-├── package.json                     # Dependency configuration and npm scripts for the project
-├── proxies.txt                      # List of proxies (each line in the format: socks5://login:pass@ip:port)
-└── utils/
-    ├── chain.js                   # Network configuration (RPC_URL, CHAIN_ID, SYMBOL, explorers, etc.)
-    ├── wallet_aggregator.js       # Interactive script to add wallets and save them in wallets.json
-    ├── wallet_generator.js        # Wallet generation script (to be implemented or improved)
-    └── wallets.json               # JSON file storing wallet information (id, address, privateKey)
+│   │       └── apis.js               # Script containing API calls for the Morkie faucet
+│   ├── owlto_faucet                  # To be Implemented – Owlto faucet script
+│   └── faucet.trade/
+│       ├── add_data.js               # Interactive script to add credentials to credentials.json for the trade faucet module
+│       ├── captcha.js                # Script to handle captcha challenges for faucet trades using bestcaptchasolver
+│       ├── credentials.json          # JSON file storing credentials for the trade faucet (e.g., API keys, secrets)
+│       ├── index.js                  # Main script for the trade faucet module; handles trade-related faucet operations with a menu for New Wallets, Existing Wallets, Add Credentials, and Exit
+│       └── scripts/
+│           └── apis.js               # To be Implemented – Script containing API calls for the trade faucet
+├── index.js                          # Main entry point with interactive menu and child process execution
+├── package.json                      # Dependency configuration and npm scripts for the project
+├── proxies.txt                       # List of proxies (each line in the format: socks5://login:pass@ip:port)
+├── .gitignore                        # Git ignore file (specifies files and directories to ignore in version control)
+└── .vscode/
+    └── launch.json                   # VSCode launch configuration for debugging the project
 
 
 ## Instructions
@@ -68,8 +84,10 @@ Good Luck! :)
 ## Requieriments
 
 1. Set your 2CAPTCHA API on "solve_captcha.py" using "nano faucets/official_faucet/solve_captcha.py" - (currently official faucet no working at all)
+2. Set your ACCESS_TOKEN on "captcha.js" using "nano faucets/faucet.trade/captcha.js" from BestCaptchaSolver Website - Here: https://bestcaptchasolver.com/account - Load some funds on your account = Done Example: https://prnt.sc/QgaLKInhRC3t
 
 ## Notes
 
-1. "faucet.js" on "actions/stake_apr.io" (is not available yet)
-2. "index.js" on "MonadTestnet" still to be updated
+1. "faucet.js" on "actions/Apriori" (is not available yet)
+2. "index.js" on "MonadTestnet" still to be updated (to add Apriori usage & Multipli)
+3. I will make a tutorial how to create APIs for credentials.json to use Faucet.Trade script

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const figlet = require('figlet');
 const inquirer = require('inquirer');
 const { spawn } = require('child_process');
@@ -53,7 +52,7 @@ async function mainMenu() {
       message: 'Select an option:',
       choices: [
         { name: '1. Claim Faucet', value: 'claimFaucet' },
-        { name: '2. Execute Swaps (coming soon...)', value: 'executeSwaps' },
+        { name: '2. Execute Swaps', value: 'executeSwaps' },
         { name: '3. Manage Liquidity (coming soon...)', value: 'manageLiquidity' },
         { name: '4. Stake Assets', value: 'stakeAssets' },
         { name: '5. Deploy a Contract', value: 'deployContract' },
@@ -76,6 +75,7 @@ async function mainMenu() {
             { name: '1. Official Faucet', value: 'officialFaucet' },
             { name: '2. Morkie Faucet', value: 'morkieFaucet' },
             { name: '3. Owlto Faucet (coming soon)', value: 'owltoFaucet' },
+            { name: '4. Faucet Trade', value: 'faucetTrade' },
           ],
         },
       ]);
@@ -85,6 +85,9 @@ async function mainMenu() {
       } else if (faucetChoice === 'morkieFaucet') {
         console.log('Launching Morkie Faucet...'.green);
         await runScript('faucets/morkie_faucet/claim.js');
+      } else if (faucetChoice === 'faucetTrade') {
+        console.log('Launching Faucet Trade...'.green);
+        await runScript('faucets/faucet.trade/index.js');
       } else {
         console.log('Owlto Faucet coming soon...'.green);
       }
@@ -92,6 +95,27 @@ async function mainMenu() {
       break;
 
     case 'executeSwaps':
+      // Nested prompt for swap selection
+      const { swapChoice } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'swapChoice',
+          message: 'Where would you like to swap assets?',
+          choices: [
+            { name: '1. BeanSwap', value: 'beanSwap' },
+            { name: '2. Ambient Finance (coming soon...)', value: 'ambientFinance' },
+          ],
+        },
+      ]);
+      if (swapChoice === 'beanSwap') {
+        console.log('Launching BeanSwap...'.green);
+        await runScript('actions/BeanSwap/swap.js');
+      } else {
+        console.log('Ambient Finance coming soon...'.green);
+      }
+      await pause();
+      break;
+
     case 'manageLiquidity':
       console.log('Feature coming soon...'.green);
       await pause();
